@@ -15,7 +15,11 @@ dotenv.config();
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    
+    await mongoose.connect(process.env.MONGO, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Connected to mongoDB.");
   } catch (error) {
     throw error;
@@ -25,6 +29,8 @@ const connect = async () => {
 mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
+
+mongoose.set('strictQuery', true);
 
 //middlewares
 app.use(cors())
