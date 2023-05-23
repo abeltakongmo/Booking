@@ -21,12 +21,13 @@ const connect = async () => {
       useUnifiedTopology: true,
     });
     console.log("Connected to mongoDB.");
-    mongoose.set('strictQuery', true);
+    
   } 
   catch (error) {
     throw error;
   }
 };
+mongoose.set('strictQuery', true);
 
 mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
