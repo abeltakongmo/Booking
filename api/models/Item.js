@@ -52,11 +52,6 @@ const ItemSchema = new mongoose.Schema({
     default: 'notavailable',
     required: false,
   },
-  available:{
-    type: Boolean,
-    default: false,
-    required: false,
-  },
 });
 
 export default mongoose.model("Item", ItemSchema)
