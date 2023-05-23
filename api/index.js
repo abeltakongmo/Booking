@@ -21,7 +21,6 @@ const connect = async () => {
       useUnifiedTopology: true,
     });
     console.log("Connected to mongoDB.");
-    
   } 
   catch (error) {
     throw error;
@@ -51,6 +50,7 @@ app.use("/api/transactions", transactionsRoute);
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";
+  console.log(errorMessage)
   return res.status(errorStatus).json({
     success: false,
     status: errorStatus,
