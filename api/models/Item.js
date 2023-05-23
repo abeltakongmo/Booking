@@ -19,13 +19,13 @@ const ItemSchema = new mongoose.Schema({
   photos: {
     type: [String],
   },
-  title: {
+  type: {
     type: String,
     required: true,
   },
   desc: {
     type: String,
-    required: true,
+    required: false,
   },
   rating: [
     {raterid: String},
@@ -36,8 +36,8 @@ const ItemSchema = new mongoose.Schema({
     }
   ],
   duration: {
-    starttime: {type: Date, required: true},
-    endtime: {type: Date, required: true},
+    starttime: {type: Date, required: false},
+    endtime: {type: Date, required: false},
   },
   cheapestPrice: {
     type: Number,
@@ -50,6 +50,11 @@ const ItemSchema = new mongoose.Schema({
   status: {
     type: String,
     default: 'notavailable',
+    required: false,
+  },
+  available:{
+    type: Boolean,
+    default: false,
     required: false,
   },
 });

@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
-import hotelsRoute from "./routes/hotels.js";
-import roomsRoute from "./routes/rooms.js";
+//import hotelsRoute from "./routes/hotels.js";
+//import roomsRoute from "./routes/rooms.js";
+import transactionsRoute from "./routes/transaction.js";
 import itemsRoute from "./routes/items.js";
 import typesRoute from "./routes/types.js";
 import cookieParser from "cookie-parser";
@@ -14,14 +15,15 @@ const app = express();
 dotenv.config();
 
 const connect = async () => {
-  try {
-    
+  try { 
     await mongoose.connect(process.env.MONGO, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     console.log("Connected to mongoDB.");
-  } catch (error) {
+    mongoose.set('strictQuery', true);
+  } 
+  catch (error) {
     throw error;
   }
 };
@@ -30,7 +32,7 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
 
-mongoose.set('strictQuery', true);
+
 
 //middlewares
 app.use(cors())
@@ -39,10 +41,11 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
-app.use("/api/hotels", hotelsRoute);
-app.use("/api/rooms", roomsRoute);
+//app.use("/api/hotels", hotelsRoute);
+//app.use("/api/rooms", roomsRoute);
 app.use("/api/items", itemsRoute);
 app.use("/api/types", typesRoute);
+app.use("/api/transactions", transactionsRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

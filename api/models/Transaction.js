@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 const TransactionSchema = new mongoose.Schema({
-  owner: {
+  ownerid: {
     type: String,
     required: true,
   },
-  client: {
+  clientid: {
     type: String,
     required: true,
   },
@@ -16,10 +16,11 @@ const TransactionSchema = new mongoose.Schema({
     starttime: {type: Date, required: true},
     endtime: {type: Date, required: true},
   },
-  text: {
-    type: String,
-    required: true,
-  },
+  message: [{
+    senderid: { type: String, required: false},
+    text: { type: String, required: false},
+    date: {type: Date, required: false}
+  }],
   status: {
     type: String,
     default: 'open',

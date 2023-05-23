@@ -1,9 +1,10 @@
 import Item from "../models/Item.js";
 import Type from "../models/Type.js";
+import User from "../models/User.js";
 
 export const createItem = async (req, res, next) => {
-  const newItem = new Item(req.body);
 
+  const newItem = new Item(req.body);
   try {
     const savedItem = await newItem.save();
     await User.findByIdAndUpdate(req.user.id, {
@@ -45,13 +46,26 @@ export const getItem = async (req, res, next) => {
     next(err);
   }
 };
+/*
+export const getItems = async (req, res, next) => {
+  
+  const { min, max, ...others } = req.query;
+  try {
+    console.log("getitems")
+    const Items = await Item.find({
+      ...others,
+      cheapestPrice: { $gt: min | 0, $lt: max || 999 },
+    }).limit(req.query.limit);
+    res.status(200).json(Items);
+  } catch (err) {
+    next(err);
+  }´
+};*/
+
 export const getItems = async (req, res, next) => {
   const { min, max, ...others } = req.query;
   try {
-    const Items = await Item.find({
-      ...others,
-      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
-    }).limit(req.query.limit);
+    const Items = await Item.find();
     res.status(200).json(Items);
   } catch (err) {
     next(err);

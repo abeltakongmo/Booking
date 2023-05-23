@@ -14,20 +14,20 @@ import {verifyAdmin} from "../utils/verifyToken.js"
 const router = express.Router();
 
 //CREATE
-router.post("/", verifyAdmin, createItem);
+router.post("/create", verifyAdmin, createItem);
 
 //UPDATE
 router.put("/:id", verifyAdmin, updateItem);
 //DELETE
-router.delete("/:id", verifyAdmin, deleteItem);
+router.delete("/remove/:id", verifyAdmin, deleteItem);
 //GET
 
 router.get("/find/:id", getItem);
 //GET ALL
 
 router.get("/", getItems);
-router.get("/countByCity", countByCity);
 router.get("/countByType", countByType);
-router.get("/userItems/:id", getUserItems);
+router.get("/countByCity", countByCity);
+router.get("/:id", getUserItems);
 
 export default router;
