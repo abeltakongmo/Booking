@@ -15,20 +15,20 @@ import {validationcreation} from "../utils/operationcoin.js"
 const router = express.Router();
 
 //CREATE
-router.post("/create", verifyAdmin, validationcreation, createItem);
+router.post("/", validationcreation, createItem);
 
 //UPDATE
-router.put("/:id", verifyAdmin, updateItem);
+router.put("/:id", updateItem);
+
 //DELETE
 router.delete("/remove/:id", verifyAdmin, deleteItem);
+
 //GET
-
-router.get("/find/:id", getItem);
-//GET ALL
-
 router.get("/", getItems);
+router.get("/:id", getItem);
+router.get("/user/:id", getUserItems);
 router.get("/countByType", countByType);
 router.get("/countByCity", countByCity);
-router.get("/:id", getUserItems);
+
 
 export default router;

@@ -4,7 +4,7 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  ownerid: {
+  owner: {
     type: String,
     required: true,
   },

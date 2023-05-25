@@ -45,8 +45,8 @@ export const deleteItem = async (req, res, next) => {
 };
 export const getItem = async (req, res, next) => {
   try {
-    const Item = await Item.findById(req.params.id);
-    res.status(200).json(Item);
+    const item = await Item.findById(req.params.id);
+    res.status(200).json(item);
   } catch (err) {
     next(err);
   }
@@ -112,13 +112,8 @@ export const countByType = async (req, res, next) => {
 
 export const getUserItems = async (req, res, next) => {
   try {
-    const Items = await Item.find({owner:req.param.id});
-    /*const list = await Promise.all(
-      Item.rooms.map((room) => {
-        return Room.findById(room);
-      })
-    );*/
-    res.status(200).json(Items)
+    const items = await Item.find({owner:req.param.id});
+    res.status(200).json(items)
   } catch (err) {
     next(err);
   }
