@@ -13,7 +13,7 @@ export const createTransaction = async (req, res, next) => {
       $push: { transactionids: savedTransaction._id },
     });
     res.status(200).json(savedTransaction);
-  } 
+  }
   catch (err) {
     next(err);
   }
@@ -33,15 +33,25 @@ export const responseTransaction = async (req, res, next) => {
       },
       { new: true }
     );
-    if(req.body.status == true){
+    if(req.body.status == 'accepted'){
+      duration = {
+        starttime : updatedTransaction.duration.starttime,
+        endtime: updatedTransaction.duration.endtime
+      }
       await Item.findByIdAndUpdate(updatedTransaction.itemid, {
         $set: { status: 'notavailable' },
-      });
+        $set: { duration: duration },
+        },
+        { new: true }
+      );
     }
-    if(req.body.status == false){
-      await Item.findByIdAndUpdate(updatedTransaction.itemid, {
-        $set: { status: 'available' },
-      });
+    if(req.body.status == 'denied'){
+      await Transaction.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: { status: 'closed' },
+        },
+      );
     }
     res.status(200).json(updatedTransaction);
   } catch (err) {

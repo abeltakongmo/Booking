@@ -10,11 +10,12 @@ import {
   updateItem,
 } from "../controllers/item.js";
 import Item from "../models/Item.js";
-import {verifyAdmin} from "../utils/verifyToken.js"
+import {verifyAdmin} from "../utils/verifyToken.js";
+import {validationcreation} from "../utils/operationcoin.js"
 const router = express.Router();
 
 //CREATE
-router.post("/create", verifyAdmin, createItem);
+router.post("/create", verifyAdmin, validationcreation, createItem);
 
 //UPDATE
 router.put("/:id", verifyAdmin, updateItem);

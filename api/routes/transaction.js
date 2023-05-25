@@ -9,11 +9,11 @@ import {
 } from "../controllers/transaction.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 import { verifyToken } from "../utils/verifyToken.js";
-
+import {validationlocation} from "../utils/operationcoin.js"
 const router = express.Router();
 
 //CREATE
-router.post("/:id", createTransaction);
+router.post("/:id", validationlocation, createTransaction);
 
 //UPDATE
 router.put("/:id", verifyToken, updateTransaction);

@@ -52,6 +52,7 @@ const ItemSchema = new mongoose.Schema({
     default: 'notavailable',
     required: false,
   },
+  expiredate: {type: Date, required: false},
 });
 
 export default mongoose.model("Item", ItemSchema)

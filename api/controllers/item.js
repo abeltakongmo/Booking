@@ -1,14 +1,19 @@
 import Item from "../models/Item.js";
 import Type from "../models/Type.js";
 import User from "../models/User.js";
+import dotenv from "dotenv";
+
 
 export const createItem = async (req, res, next) => {
-
-  const newItem = new Item(req.body);
   try {
+    req.body.expiredate =  new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+    req.body.duration.starttime = new Date()
+    req.body.duration.endtime = req.body.expiredate
+    const newItem = new Item(req.body);
     const savedItem = await newItem.save();
     await User.findByIdAndUpdate(req.user.id, {
         $push: { itemids: savedItem._id },
+        $set: { coin: res.usercoin - process.env.CREATION},
     });
     res.status(200).json(savedItem);
   } catch (err) {
@@ -65,6 +70,7 @@ export const getItems = async (req, res, next) => {
 export const getItems = async (req, res, next) => {
   const { min, max, ...others } = req.query;
   try {
+
     const Items = await Item.find();
     res.status(200).json(Items);
   } catch (err) {
