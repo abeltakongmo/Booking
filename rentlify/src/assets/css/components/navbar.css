@@ -1,0 +1,33 @@
+.navbar-container {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.navbar-left .logo span {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-actions button {
+  padding: 0.2rem 0.5rem;
+  border: 2px solid #ccc;
+  background-color: white;
+  border-radius: 3px;
+  margin-left: 1rem;
+  font-weight: 500;
+}

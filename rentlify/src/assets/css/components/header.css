@@ -1,0 +1,39 @@
+.header-container {
+  background-color: rgb(9, 56, 126);
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-brand {
+  color: whitesmoke;
+  margin-bottom: 2rem;
+}
+
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-input-form {
+  background-color: white;
+}
+
+.header-input-wraper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.header-input-wraper .input-item {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 0 0.5rem;
+}
+
+.header-input-wraper .input-item span {
+  text-align: center;
+}
