@@ -1,0 +1,86 @@
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgb(9, 56, 126);
+}
+
+.register-wrapper {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  color: #444;
+}
+
+.register-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form .rg-input-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.register-form .rg-input-item span {
+  font-size: 13px;
+}
+
+.register-form .rg-input-item input {
+  outline: none;
+  padding: 0.2rem 0.5rem;
+}
+
+.rg-infos-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.rg-infos-wrapper span {
+  font-size: 14px;
+  text-align: center;
+}
+
+.rg-actions-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.rg-actions-wrapper span {
+  font-size: 14px;
+  text-align: center;
+}
+
+.rg-infos-wrapper span a,
+.rg-actions-wrapper span a {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.rg-infos-wrapper span a:hover,
+.rg-actions-wrapper span a:hover {
+  color: rgb(0, 110, 255);
+  text-decoration: underline;
+}
+
+.rg-btn {
+  outline: none;
+  border: none;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  border-radius: 3px;
+}
+
+.rg-btn:hover {
+  background-color: #333;
+}

@@ -1,6 +1,32 @@
+import { DateRange } from "react-date-range";
+import { useState } from "react";
+import { format } from "date-fns";
 import "../assets/css/components/header.css";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 export default function Header() {
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+  const [openDate, setOpenDate] = useState(false);
+  const [dates, setDates] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const item = {
+      location,
+      category,
+      dates,
+    };
+    console.log(item, "submitted.");
+  };
   return (
     <div className="header-container">
       <div className="herder-bg-left"></div>
@@ -14,26 +40,66 @@ export default function Header() {
           <div className="header-brand-right"></div>
         </div>
 
-        <form className="card card-body header-input-form">
-          <div className="header-input-wraper">
-            <div className="input-item">
+        <form
+          className="card card-body header-input-form col-12"
+          onSubmit={handleSubmit}
+        >
+          <div className="header-input-wraper d-flex flex-column flex-md-row">
+            <div className="input-item col-12 col-md-2">
               <span>Location</span>
-              <input type="text" placeholder="Location" />
+              <input
+                required
+                onChange={(e) => setLocation(e.target.value)}
+                type="text"
+                placeholder="Location"
+              />
             </div>
 
-            <div className="input-item">
+            <div className="input-item col-12 col-md-2">
               <span>Categories</span>
-              <input type="text" placeholder="Categories" />
+              <input
+                required
+                onChange={(e) => setCategory(e.target.value)}
+                type="text"
+                placeholder="Categories"
+              />
             </div>
 
-            <div className="input-item">
-              <span>Start Date</span>
-              <input type="date" placeholder="Start Date" />
+            <div className="input-item col-12 col-md-4">
+              <div
+                className="date-range"
+                onClick={() => setOpenDate(!openDate)}
+              >
+                <div className="date-rg-item">
+                  <span>Start Date</span>
+                  <div className="date-rg">
+                    {format(dates[0].startDate, "MM-dd-yyyy")}
+                  </div>
+                </div>
+
+                <div className="date-rg-item">
+                  <span>End Date</span>
+                  <div className="date-rg">
+                    {format(dates[0].endDate, "MM-dd-yyyy")}
+                  </div>
+                </div>
+              </div>
+              <>
+                {openDate && (
+                  <DateRange
+                    editableDateInputs={true}
+                    onChange={(item) => setDates([item.selection])}
+                    moveRangeOnFirstSelection={false}
+                    ranges={dates}
+                    className="date-select"
+                    minDate={new Date()}
+                  />
+                )}
+              </>
             </div>
 
-            <div className="input-item">
-              <span>End Date</span>
-              <input type="date" placeholder="End Date" />
+            <div className="input-item col-12 col-md-2">
+              <button type="submit">Submit</button>
             </div>
           </div>
         </form>

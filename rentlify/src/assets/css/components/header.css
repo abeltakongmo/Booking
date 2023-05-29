@@ -1,6 +1,6 @@
 .header-container {
   background-color: rgb(9, 56, 126);
-  height: 55vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,11 +8,14 @@
 
 .header-brand {
   color: whitesmoke;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .header-wrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -21,19 +24,69 @@
 }
 
 .header-input-wraper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
 }
 
 .header-input-wraper .input-item {
   display: flex;
+  justify-content: flex-end;
   flex-direction: column;
-  width: 20%;
-  margin: 0 0.5rem;
+  margin: 0.2rem;
+  position: relative;
+  color: #444;
+}
+
+.header-input-wraper .input-item input {
+  outline: none;
+  height: 30px;
+  padding: 0 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  border-radius: 3px;
 }
 
 .header-input-wraper .input-item span {
-  text-align: center;
+  font-size: 0.8rem;
+}
+
+.header-input-wraper .input-item button {
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.date-range {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.date-rg-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-rg-item span {
+  font-size: 0.8rem;
+}
+
+.date-rg-item .date-rg {
+  height: 30px;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  border-radius: 3px;
+}
+
+.header-input-wraper .input-item .date-select {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 10;
 }

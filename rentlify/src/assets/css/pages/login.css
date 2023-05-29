@@ -1,0 +1,86 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgb(9, 56, 126);
+}
+
+.login-wrapper {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  color: #444;
+}
+
+.login-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form .lg-input-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.login-form .lg-input-item span {
+  font-size: 13px;
+}
+
+.login-form .lg-input-item input {
+  outline: none;
+  padding: 0.2rem 0.5rem;
+}
+
+.lg-infos-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.lg-infos-wrapper span {
+  font-size: 14px;
+  text-align: center;
+}
+
+.lg-actions-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.lg-actions-wrapper span {
+  font-size: 14px;
+  text-align: center;
+}
+
+.lg-infos-wrapper span a,
+.lg-actions-wrapper span a {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.lg-infos-wrapper span a:hover,
+.lg-actions-wrapper span a:hover {
+  color: rgb(0, 110, 255);
+  text-decoration: underline;
+}
+
+.lg-btn {
+  outline: none;
+  border: none;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  border-radius: 3px;
+}
+
+.lg-btn:hover {
+  background-color: #333;
+}
