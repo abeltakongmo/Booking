@@ -20,7 +20,7 @@ export default function Register() {
   };
   return (
     <div className="register-container">
-      <div className="container register-wrapper">
+      <div className="container register-wrapper col-10 col-md-5">
         <h2>Register</h2>
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="rg-input-item">
