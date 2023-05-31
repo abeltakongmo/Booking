@@ -14,7 +14,7 @@ export default function Select({ value, items, onChange }) {
       className="select-wrapper"
       onClick={() => setOnSelect((prev) => !onSelect)}
     >
-      <span className="curr-select">{value?.name}</span>
+      <span className="curr-select">{value ? value?.name : "--Select--"}</span>
       <div className={onSelect ? "select-items active" : "select-items"}>
         {items.map((item) => (
           <div

@@ -1,0 +1,23 @@
+.category-wrapper {
+  margin-top: 2rem;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+}
+
+.category-item img {
+  height: 220px;
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.category-item-name {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  text-transform: capitalize;
+}

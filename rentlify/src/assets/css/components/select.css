@@ -36,6 +36,7 @@
 .select-item {
   width: 100%;
   padding: 0.2rem 0.5rem;
+  overflow: hidden;
 }
 
 .select-item .select-item-value {

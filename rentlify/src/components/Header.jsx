@@ -4,18 +4,18 @@ import "../assets/css/components/header.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
-import { useEffect, useRef, useState } from "react";
-import { loadCategories } from "../services/services";
+import { useRef, useState } from "react";
 import Select from "./Select";
 
 const places = ["places"];
 
-export default function Header() {
+export default function Header({ categories }) {
   const locationRef = useRef();
   const autoCompleteRef = useRef();
 
-  const [category, setCategory] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(
+    categories.length > 0 ? categories[0] : null
+  );
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
     {
@@ -24,24 +24,6 @@ export default function Header() {
       key: "selection",
     },
   ]);
-
-  console.log(categories);
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-  const getCategories = async () => {
-    try {
-      const res = await loadCategories();
-      if (res?.data) {
-        setCategories(res.data);
-        setCategory(res.data[0]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_API_KEY,
