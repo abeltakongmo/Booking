@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../assets/css/pages/register.css";
 import { useState } from "react";
+import { register } from "../services/services";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const user = {
@@ -16,11 +19,20 @@ export default function Register() {
       password,
     };
 
-    console.log(user, "register");
+    try {
+      const res = await register(user);
+      if (res?.data) {
+        console.log(res.data);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div className="register-container">
-      <div className="container register-wrapper col-10 col-md-5">
+      <div className="container register-wrapper col-10 col-md-5 col-lg-4">
         <h2>Register</h2>
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="rg-input-item">

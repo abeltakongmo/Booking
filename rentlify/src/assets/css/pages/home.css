@@ -2,18 +2,26 @@
   margin-top: 2rem;
 }
 
+.rent-item,
 .category-item {
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
 }
 
+.rent-item img,
 .category-item img {
   height: 220px;
   width: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
   overflow: hidden;
+}
+
+.rent-item-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .category-item-name {
