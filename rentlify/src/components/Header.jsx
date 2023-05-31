@@ -1,9 +1,12 @@
 import { DateRange } from "react-date-range";
-import { useState } from "react";
 import { format } from "date-fns";
 import "../assets/css/components/header.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
+import { useRef, useState } from "react";
+
+const places = ["places"];
 
 export default function Header() {
   const [location, setLocation] = useState("");
@@ -17,6 +20,13 @@ export default function Header() {
     },
   ]);
 
+  const autoCompleteRef = useRef();
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_API_KEY,
+    libraries: places,
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,6 +37,7 @@ export default function Header() {
     };
     console.log(item, "submitted.");
   };
+
   return (
     <div className="header-container">
       <div className="herder-bg-left"></div>
@@ -47,12 +58,23 @@ export default function Header() {
           <div className="header-input-wraper d-flex flex-column flex-md-row">
             <div className="input-item col-12 col-md-2">
               <span>Location</span>
-              <input
-                required
-                onChange={(e) => setLocation(e.target.value)}
-                type="text"
-                placeholder="Location"
-              />
+              {!isLoaded ? (
+                <input
+                  required
+                  onChange={(e) => setLocation(e.target.value)}
+                  type="text"
+                  placeholder="Location"
+                />
+              ) : (
+                <Autocomplete ref={autoCompleteRef} className="auto-cpl">
+                  <input
+                    required
+                    onChange={(e) => setLocation(e.target.value)}
+                    type="text"
+                    placeholder="Location"
+                  />
+                </Autocomplete>
+              )}
             </div>
 
             <div className="input-item col-12 col-md-2">
@@ -99,7 +121,9 @@ export default function Header() {
             </div>
 
             <div className="input-item col-12 col-md-2">
-              <button type="submit">Submit</button>
+              <button className="header-submit-btn" type="submit">
+                Submit
+              </button>
             </div>
           </div>
         </form>

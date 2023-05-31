@@ -1,6 +1,6 @@
 .header-container {
   background-color: rgb(9, 56, 126);
-  height: 70vh;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,6 +36,10 @@
   color: #444;
 }
 
+.header-input-wraper .input-item .auto-cpl {
+  width: 100%;
+}
+
 .header-input-wraper .input-item input {
   outline: none;
   height: 30px;
@@ -43,13 +47,14 @@
   border: 1px solid #ccc;
   font-size: 14px;
   border-radius: 3px;
+  width: 100%;
 }
 
 .header-input-wraper .input-item span {
   font-size: 0.8rem;
 }
 
-.header-input-wraper .input-item button {
+.header-input-wraper .header-submit-btn {
   background-color: #444;
   color: white;
   border: none;
