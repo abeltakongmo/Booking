@@ -4,13 +4,18 @@ import "../assets/css/components/header.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { loadCategories } from "../services/services";
+import Select from "./Select";
 
 const places = ["places"];
 
 export default function Header() {
-  const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("");
+  const locationRef = useRef();
+  const autoCompleteRef = useRef();
+
+  const [category, setCategory] = useState(null);
+  const [categories, setCategories] = useState([]);
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
     {
@@ -20,7 +25,23 @@ export default function Header() {
     },
   ]);
 
-  const autoCompleteRef = useRef();
+  console.log(categories);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = async () => {
+    try {
+      const res = await loadCategories();
+      if (res?.data) {
+        setCategories(res.data);
+        setCategory(res.data[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_API_KEY,
@@ -30,8 +51,12 @@ export default function Header() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!locationRef?.current) {
+      return;
+    }
+
     const item = {
-      location,
+      location: locationRef.current.value,
       category,
       dates,
     };
@@ -60,6 +85,7 @@ export default function Header() {
               <span>Location</span>
               {!isLoaded ? (
                 <input
+                  ref={locationRef}
                   required
                   onChange={(e) => setLocation(e.target.value)}
                   type="text"
@@ -68,8 +94,9 @@ export default function Header() {
               ) : (
                 <Autocomplete ref={autoCompleteRef} className="auto-cpl">
                   <input
+                    ref={locationRef}
                     required
-                    onChange={(e) => setLocation(e.target.value)}
+                    // onChange={(e) => setLocation(e.target.value)}
                     type="text"
                     placeholder="Location"
                   />
@@ -79,11 +106,10 @@ export default function Header() {
 
             <div className="input-item col-12 col-md-2">
               <span>Categories</span>
-              <input
-                required
-                onChange={(e) => setCategory(e.target.value)}
-                type="text"
-                placeholder="Categories"
+              <Select
+                value={category}
+                onChange={setCategory}
+                items={categories}
               />
             </div>
 
