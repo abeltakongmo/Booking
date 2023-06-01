@@ -4,7 +4,7 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  owner: {
+  ownerid: {
     type: String,
     required: true,
   },
@@ -39,7 +39,7 @@ const ItemSchema = new mongoose.Schema({
     starttime: {type: Date, required: false},
     endtime: {type: Date, required: false},
   },
-  cheapestPrice: {
+  dailyPrice: {
     type: Number,
     required: false,
   },
@@ -53,6 +53,7 @@ const ItemSchema = new mongoose.Schema({
     required: false,
   },
   expiredate: {type: Date, required: false},
-});
+},
+{ timestamps: true });
 
 export default mongoose.model("Item", ItemSchema)

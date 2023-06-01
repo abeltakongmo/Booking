@@ -26,6 +26,7 @@ const TransactionSchema = new mongoose.Schema({
     default: 'open',
     required: false,
   },
-});
+},
+{ timestamps: true });
 
 export default mongoose.model("Transaction", TransactionSchema)

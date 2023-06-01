@@ -10,15 +10,15 @@ import {
   updateItem,
 } from "../controllers/item.js";
 import Item from "../models/Item.js";
-import {verifyAdmin} from "../utils/verifyToken.js";
+import {verifyAdmin, verifyToken} from "../utils/verifyToken.js";
 import {validationcreation} from "../utils/operationcoin.js"
 const router = express.Router();
 
 //CREATE
-router.post("/", validationcreation, createItem);
+router.post("/", verifyToken, validationcreation, createItem);
 
 //UPDATE
-router.put("/:id", updateItem);
+router.put("/:id", verifyToken, updateItem);
 
 //DELETE
 router.delete("/remove/:id", verifyAdmin, deleteItem);

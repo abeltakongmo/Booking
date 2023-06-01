@@ -15,7 +15,7 @@ const app = express();
 dotenv.config();
 
 const connect = async () => {
-  try { 
+  try {
     await mongoose.connect(process.env.MONGO, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

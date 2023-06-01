@@ -2,7 +2,7 @@ import Item from "../models/Item.js";
 import Type from "../models/Type.js";
 import User from "../models/User.js";
 import dotenv from "dotenv";
-
+//import moment from "moment";
 
 export const createItem = async (req, res, next) => {
   try {
@@ -66,12 +66,26 @@ export const getItems = async (req, res, next) => {
     next(err);
   }´
 };*/
-
+function isEmptyObject(value) {
+  return Object.keys(value).length === 0 && value.constructor === Object;
+}
 export const getItems = async (req, res, next) => {
-  const { min, max, ...others } = req.query;
   try {
+    let Items = [];
+    if(!isEmptyObject(req.query)){
 
-    const Items = await Item.find();
+        Items = await Item.find({
+        $and: [{
+          type: req.query?.type,
+          city: req.query?.city,
+          status: req.query?.status,
+          expiredate: { $gte: new Date(req.query.endtime)}
+        }]
+      });
+    }
+    else{ Items = await Item.find();
+    }
+    console.log('found Items ' +Items.length)
     res.status(200).json(Items);
   } catch (err) {
     next(err);
