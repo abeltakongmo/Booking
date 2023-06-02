@@ -15,7 +15,7 @@ router.post("/:id", verifyAdmin, createType);
 //UPDATE
 router.put("/:id", verifyAdmin, updateType);
 //DELETE
-router.delete("/:id/:hotelid", verifyAdmin, deleteType);
+router.delete("/:id", verifyAdmin, deleteType);
 //GET
 
 router.get("/:id", getType);

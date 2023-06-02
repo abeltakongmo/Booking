@@ -37,13 +37,6 @@ export const deleteType = async (req, res, next) => {
   const typeid = req.params.typeid;
   try {
     await Type.findByIdAndDelete(req.params.id);
-    try {
-      await Type.findByIdAndUpdate(typeid, {
-        $pull: { Types: req.params.id },
-      });
-    } catch (err) {
-      next(err);
-    }
     res.status(200).json("Type has been deleted.");
   } catch (err) {
     next(err);
