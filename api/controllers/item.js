@@ -1,8 +1,8 @@
-import Item from "../models/Item.js";
 import Type from "../models/Type.js";
+import Item from "../models/Item.js";
 import User from "../models/User.js";
 import dotenv from "dotenv";
-
+import { isEmptyObject } from "../utils/function.js";
 
 export const createItem = async (req, res, next) => {
   try {
@@ -68,15 +68,27 @@ export const getItems = async (req, res, next) => {
 };*/
 
 export const getItems = async (req, res, next) => {
-  const { min, max, ...others } = req.query;
   try {
-
-    const Items = await Item.find();
+    let Items = [];
+    if(!isEmptyObject(req.query)){
+        Items = await Item.find({
+        $and: [{
+          type: req.query?.type,
+          city: req.query?.city,
+          status: req.query?.status,
+          expiredate: { $gte: new Date(req.query.endtime)}
+        }]
+      });
+    }
+    else{ Items = await Item.find();
+    }
+    console.log('found Items ' +Items.length)
     res.status(200).json(Items);
   } catch (err) {
     next(err);
   }
 };
+
 export const countByCity = async (req, res, next) => {
   const cities = req.query.cities.split(",");
   try {
@@ -92,19 +104,17 @@ export const countByCity = async (req, res, next) => {
 };
 export const countByType = async (req, res, next) => {
   try {
-    const ItemCount = await Item.countDocuments({ type: "Item" });
-    const apartmentCount = await Item.countDocuments({ type: "apartment" });
-    const resortCount = await Item.countDocuments({ type: "resort" });
-    const villaCount = await Item.countDocuments({ type: "villa" });
-    const cabinCount = await Item.countDocuments({ type: "cabin" });
-
-    res.status(200).json([
-      { type: "Item", count: ItemCount },
-      { type: "apartments", count: apartmentCount },
-      { type: "resorts", count: resortCount },
-      { type: "villas", count: villaCount },
-      { type: "cabins", count: cabinCount },
-    ]);
+    const Types = await Type.find();
+    const list = await Promise.all(
+      Types.map(async (tp) => {
+        var count = 0
+        for( var subname of tp.subnames){
+          count = count + await Item.countDocuments({ type: subname })
+        }
+        return { type: tp.name, count: count}
+      })
+    );
+    res.status(200).json(list);
   } catch (err) {
     next(err);
   }
