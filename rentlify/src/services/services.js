@@ -19,4 +19,4 @@ export const register = (creds) =>
 
 // load categories
 export const loadCategories = () => _axios.get(`/api/types`);
-export const loadRentItems = () => _axios.get(`/api/items`);
+export const loadRentItems = (url) => _axios.get(url);

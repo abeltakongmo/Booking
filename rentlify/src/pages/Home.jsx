@@ -14,7 +14,7 @@ export default function Home() {
   const loadData = async () => {
     try {
       const res = await loadCategories();
-      const resItems = await loadRentItems();
+      const resItems = await loadRentItems(`/api/items`);
       if (res?.data) {
         setCategories(res.data);
       }

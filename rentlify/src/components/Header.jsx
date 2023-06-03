@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import "../assets/css/components/header.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { useNavigate } from "react-router-dom";
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import { useRef, useState } from "react";
 import Select from "./Select";
@@ -10,6 +11,8 @@ import Select from "./Select";
 const places = ["places"];
 
 export default function Header({ categories }) {
+  const navigate = useNavigate();
+
   const locationRef = useRef();
   const autoCompleteRef = useRef();
 
@@ -37,12 +40,12 @@ export default function Header({ categories }) {
       return;
     }
 
-    const item = {
+    const options = {
       location: locationRef.current.value,
-      category,
+      category: category.name,
       dates,
     };
-    console.log(item, "submitted.");
+    navigate("/search", { state: options });
   };
 
   return (
