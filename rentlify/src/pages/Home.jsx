@@ -33,7 +33,7 @@ export default function Home() {
         <div className="container">
           <div className="card card-body">
             <h4>Latest Rentals</h4>
-            <div className="row rentals-wrapper">
+            <div className="row rentals-wrapper mt-2">
               {rentItems.map((rent) => (
                 <div className="col-12 col-md-4 rent-item" key={rent?._id}>
                   <img
@@ -56,7 +56,7 @@ export default function Home() {
         <div className="container">
           <div className="card card-body">
             <h4>Most common categories</h4>
-            <div className="row category-wrapper">
+            <div className="row category-wrapper mt-2">
               {categories.map((category) => (
                 <div
                   className="col-12 col-md-4 category-item"

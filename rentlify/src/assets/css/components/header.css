@@ -21,6 +21,7 @@
 
 .header-input-form {
   background-color: white;
+  min-height: 100px;
 }
 
 .header-input-wraper {
