@@ -80,7 +80,9 @@ export const getItems = async (req, res, next) => {
           ...req.query.type ? { type: req.query.type } : {},
           ...req.query.city ? { city: req.query.city } : {},
           ...req.query.status ? { status: req.query.status } : {},
-          ...req.query.endtime ? { expiredate: { $gte: new Date(req.query.endtime) }} : {}
+          ...req.query.endtime ? { expiredate: { $gte: new Date(req.query.endtime) }} : {},
+          ...req.query.starttime ? { "duration.starttime": { $lte: new Date(req.query.starttime) }} : {},
+          ...req.query.endtime ? { "duration.endtime": { $gte: new Date(req.query.endtime) }} : {} 
         }]
       });
     }
