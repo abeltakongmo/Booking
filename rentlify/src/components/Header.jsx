@@ -1,8 +1,6 @@
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import "../assets/css/components/header.css";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
 import { useNavigate } from "react-router-dom";
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import { useRef, useState } from "react";
@@ -42,8 +40,9 @@ export default function Header({ categories }) {
 
     const options = {
       location: locationRef.current.value,
-      category: category.name,
+      category: category,
       dates,
+      categories,
     };
     navigate("/search", { state: options });
   };

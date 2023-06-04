@@ -65,17 +65,20 @@
   cursor: pointer;
 }
 
-.date-range {
+.date-range,
+.price-range {
   display: flex;
   gap: 0.5rem;
 }
 
-.date-rg-item {
+.date-rg-item,
+.price-rg-item {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+.price-rg-item span,
 .date-rg-item span {
   font-size: 0.8rem;
 }
