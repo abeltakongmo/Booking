@@ -67,16 +67,20 @@ export const getItems = async (req, res, next) => {
   }´
 };*/
 
+
+
 export const getItems = async (req, res, next) => {
   try {
     let Items = [];
+    //var _type  =  getquery(req.query?.type)
+    //console.log('type '+ _type)
     if(!isEmptyObject(req.query)){
         Items = await Item.find({
         $and: [{
-          type: req.query?.type,
-          city: req.query?.city,
-          status: req.query?.status,
-          expiredate: { $gte: new Date(req.query.endtime)}
+          ...req.query.type ? { type: req.query.type } : {},
+          ...req.query.city ? { city: req.query.city } : {},
+          ...req.query.status ? { status: req.query.status } : {},
+          ...req.query.endtime ? { expiredate: { $gte: new Date(req.query.endtime) }} : {}
         }]
       });
     }
@@ -111,7 +115,7 @@ export const countByType = async (req, res, next) => {
         for( var subname of tp.subnames){
           count = count + await Item.countDocuments({ type: subname })
         }
-        return { type: tp.name, count: count}
+        return { type: tp.name, count: count, image:tp.image}
       })
     );
     res.status(200).json(list);
