@@ -83,7 +83,6 @@ export const getItems = async (req, res, next) => {
           ...req.query.endtime ? { expiredate: { $gte: new Date(req.query.endtime) }} : {},
           ...req.query.starttime ? { "duration.starttime": { $lte: new Date(req.query.starttime) }} : {},
           ...req.query.endtime ? { "duration.endtime": { $gte: new Date(req.query.endtime) }} : {},
-
           ...req.query.minprice ? { dailyPrice: { $lte: req.query.minprice }} : {},
           ...req.query.maxprice ? { dailyPrice: { $gte:req.query.maxprice }} : {}
         }]
