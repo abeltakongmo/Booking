@@ -12,6 +12,7 @@ const places = ["places"];
 
 export default function Search() {
   const navigation = useLocation();
+  const autoCompleteRef = useRef();
 
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(undefined);
@@ -20,15 +21,8 @@ export default function Search() {
   const [location, setLocation] = useState(navigation.state.location);
   const [categories, setCategories] = useState(navigation.state.categories);
 
-  console.log(
-    dates[0]?.endDate.toDateString(),
-    dates[0]?.startDate.toDateString(),
-    category,
-    location
-  );
+  const locationRef = useRef(location);
 
-  const locationRef = useRef();
-  const autoCompleteRef = useRef();
   const [openDate, setOpenDate] = useState(false);
 
   const { isLoaded } = useJsApiLoader({
@@ -37,10 +31,10 @@ export default function Search() {
   });
 
   const { data, loading, error, reFetch } = useRentFetch(
-    `api/items?city=${location}&type=${category}&endtime=${dates?.endDate}&starttime=${dates?.startDate}`
+    `api/items?city=${location}&type=${category}&endtime=${dates[0]?.endDate}&starttime=${dates[0]?.startDate}`
   );
 
-  console.log(data, loading, error);
+  console.log(loading, data, error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +66,7 @@ export default function Search() {
                         value={location}
                         ref={locationRef}
                         required
-                        // onChange={(e) => setLocation(e.target.value)}
+                        onChange={() => {}}
                         type="text"
                         placeholder="Location"
                       />
@@ -163,10 +157,19 @@ export default function Search() {
               <div className="item-dts">
                 <div className="title-wrapper">
                   <span className="item-title">Rent my BMW</span>
-                  <span className="item-price">135 €</span>
+                  <div className="item-price">
+                    <small>Day Price</small>
+                    <span>135 €</span>
+                  </div>
                 </div>
-
                 <span className="item-loc">Frankfurt Am Main</span>
+                <p className="item-desc">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit Animi
+                  expedita officiis quo, aperiam adipisci vero iste dolore...
+                </p>
+                <div className="item-dispo">
+                  <span>Availability</span>
+                </div>
               </div>
             </div>
           </div>
@@ -181,10 +184,19 @@ export default function Search() {
               <div className="item-dts">
                 <div className="title-wrapper">
                   <span className="item-title">Rent my BMW</span>
-                  <span className="item-price">135 €</span>
+                  <div className="item-price">
+                    <small>Day Price</small>
+                    <span>135 €</span>
+                  </div>
                 </div>
-
                 <span className="item-loc">Frankfurt Am Main</span>
+                <p className="item-desc">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit Animi
+                  expedita officiis quo, aperiam adipisci vero iste dolore...
+                </p>
+                <div className="item-dispo">
+                  <span>Availability</span>
+                </div>
               </div>
             </div>
           </div>
@@ -199,10 +211,19 @@ export default function Search() {
               <div className="item-dts">
                 <div className="title-wrapper">
                   <span className="item-title">Rent my BMW</span>
-                  <span className="item-price">135 €</span>
+                  <div className="item-price">
+                    <small>Day Price</small>
+                    <span>135 €</span>
+                  </div>
                 </div>
-
                 <span className="item-loc">Frankfurt Am Main</span>
+                <p className="item-desc">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit Animi
+                  expedita officiis quo, aperiam adipisci vero iste dolore...
+                </p>
+                <div className="item-dispo">
+                  <span>Availability</span>
+                </div>
               </div>
             </div>
           </div>
@@ -217,28 +238,19 @@ export default function Search() {
               <div className="item-dts">
                 <div className="title-wrapper">
                   <span className="item-title">Rent my BMW</span>
-                  <span className="item-price">135 €</span>
+                  <div className="item-price">
+                    <small>Day Price</small>
+                    <span>135 €</span>
+                  </div>
                 </div>
-
                 <span className="item-loc">Frankfurt Am Main</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="card overflow-hidden mb-4">
-            <div className="search-item-wrapper">
-              <img
-                className="item-pic"
-                src="https://www.topgear.com/sites/default/files/2022/07/6_0.jpg"
-                alt=""
-              />
-              <div className="item-dts">
-                <div className="title-wrapper">
-                  <span className="item-title">Rent my BMW</span>
-                  <span className="item-price">135 €</span>
+                <p className="item-desc">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit Animi
+                  expedita officiis quo, aperiam adipisci vero iste dolore...
+                </p>
+                <div className="item-dispo">
+                  <span>Availability</span>
                 </div>
-
-                <span className="item-loc">Frankfurt Am Main</span>
               </div>
             </div>
           </div>
